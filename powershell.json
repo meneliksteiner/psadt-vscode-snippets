@@ -91,6 +91,18 @@
     ],
     "description": "Get All User Profile Paths"
   },
+  "Foreach User Profile": {
+    "prefix": "psadt-foreach-userprofile",
+    "body": [
+      "# Loop through each user profile on the system",
+      "[string[]]\\$ProfilePaths = Get-ADTUserProfiles | Select-Object -ExpandProperty ProfilePath",
+      "",
+      "foreach (\\$Profile in \\$ProfilePaths) {",
+      "    $1",
+      "}"
+    ],
+    "description": "Foreach Loop Over All User Profiles"
+  },
   "Copy File to User Profiles": {
     "prefix": "psadt-copy-userprofiles",
     "body": [
@@ -148,6 +160,23 @@
       "Update-ADTDesktop"
     ],
     "description": "Refresh Windows Explorer Shell"
+  },
+  "Write Log Entry": {
+    "prefix": "psadt-log",
+    "body": ["Write-ADTLogEntry -Message '$1' -Severity ${2|1,2,3|}"],
+    "description": "Write Custom Log Entry (Severity: 1=Info, 2=Warning, 3=Error)"
+  },
+  "Try Catch": {
+    "prefix": "psadt-try-catch",
+    "body": [
+      "try {",
+      "    $1",
+      "}",
+      "catch {",
+      "    Write-ADTLogEntry -Message \"Failed: \\$_\" -Severity 3",
+      "}"
+    ],
+    "description": "Try/Catch Block with PSADT Logging"
   },
   "If Test-Path Check": {
     "prefix": "psadt-if-testpath",

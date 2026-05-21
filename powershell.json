@@ -1,163 +1,157 @@
 {
-
-            "Install EXE Application": {
-                        "prefix": "psadtexe",
-                        "body": [
-
-                                    "# Install $1 silently",
-
-                                    "Start-ADTProcess -FilePath \"$2\" -ArgumentList \"$3\""
-
-                        ],
-
-                        "description": "Install EXE Application"
-
-            },
-
-            "Install MSI Application": {
-
-                        "prefix": "psadtmsi",
-
-                        "body": [
-
-                                    "# Install $1 silently",
-
-                                    "Start-ADTMsiProcess -Action Install -FilePath \"$2\" -ArgumentList \"$3\""
-
-                        ],
-
-                        "description": "Install MSI Application"
-
-            },
-
-            "Uninstall Application": {
-
-                        "prefix": "psadtrmapp",
-
-                        "body": [
-
-                                    "# Uninstall $1 silently",
-
-                                    "Uninstall-ADTApplication -Name \"$2\" -ArgumentList \"$3\" -NameMatch \"Exact\""
-
-                        ],
-
-                        "description": "Uninstall Application"
-
-            },
-
-            "Remove File": {
-
-                        "prefix": "psadtrmfile",
-
-                        "body": [
-
-                                    "# Remove $1",
-
-                                    "Remove-ADTFile -Path \"$2\""
-
-                        ],
-
-                        "description": "Remove File"
-
-            },
-
-            "Remove Folder": {
-
-                        "prefix": "psadtrmdir",
-
-                        "body": [
-
-                                    "# Remove $1",
-
-                                    "Remove-ADTFolder -Path \"$2\""
-
-                        ],
-
-                        "description": "Remove Folder"
-
-            },
-
-            "Remove File from Start Menu": {
-
-                        "prefix": "psadtrmstart",
-
-                        "body": [
-
-                                    "# Remove $1 from Start Menu",
-
-                                    "Remove-ADTFile -Path \\\$envCommonStartMenuPrograms\\\\$2\"
-
-                        ],
-
-                        "description": "Remove File from Start Menu"
-
-            },
-
-            "Remove File from Desktop": {
-
-                        "prefix": "psadtrmdesktop",
-
-                        "body": [
-
-                                    "# Remove $1 from Public Desktop",
-
-                                    "Remove-ADTFile -Path \\\$envCommonDesktop\\\\$2\"
-
-                        ],
-
-                        "description": "Remove File from Public Desktop"
-
-            },
-
-            "Copy File": {
-
-                        "prefix": "psadtcpfile",
-
-                        "body": [
-
-                                    "# Copy $1",
-
-                                    "Copy-ADTFile -Path \"$1\" -Destination \"$2\""
-
-                        ],
-
-                        "description": "Copy File to Destination"
-
-            },
-
-            "Copy Folder": {
-
-                        "prefix": "psadtcpdir",
-
-                        "body": [
-
-                                    "# Copy $1",
-
-                                    "Copy-ADTFolder -Path \\\$(\\$adtSession.DirFiles)\\\\$1\ -Destination \"$2\" -Recurse"
-
-                        ],
-
-                        "description": "Copy Folder to Destination"
-
-            },
-
-            "If Test-Path Check": {
-
-                        "prefix": "psadtiftestpath",
-
-                        "body": [
-
-                                    "if (Test-Path \"$1\") {",
-
-                                    "    $0",
-
-                                    "}"
-
-                        ],
-
-                        "description": "Check if a given path exists using Test-Path."
-
-            }
-
+  "Install EXE Application": {
+    "prefix": "psadt-install-exe",
+    "body": [
+      "# Install $1 silently",
+      "Start-ADTProcess -FilePath \"$2\" -ArgumentList \"$3\""
+    ],
+    "description": "Install EXE Application"
+  },
+  "Install MSI Application": {
+    "prefix": "psadt-install-msi",
+    "body": [
+      "# Install $1 silently",
+      "Start-ADTMsiProcess -Action Install -FilePath \"$2\" -ArgumentList \"$3\""
+    ],
+    "description": "Install MSI Application"
+  },
+  "Uninstall Application": {
+    "prefix": "psadt-uninstall-app",
+    "body": [
+      "# Uninstall $1 silently",
+      "Uninstall-ADTApplication -Name \"$2\" -ArgumentList \"$3\" -NameMatch \"Exact\""
+    ],
+    "description": "Uninstall Application"
+  },
+  "Remove File": {
+    "prefix": "psadt-remove-file",
+    "body": ["# Remove $1", "Remove-ADTFile -Path \"$2\""],
+    "description": "Remove File"
+  },
+  "New Folder": {
+    "prefix": "psadt-new-folder",
+    "body": ["# Create $1 folder", "New-ADTFolder -LiteralPath \"$2\""],
+    "description": "Create New Folder"
+  },
+  "New Shortcut": {
+    "prefix": "psadt-new-shortcut",
+    "body": [
+      "# Creates a new shortcut for $1",
+      "New-ADTShortcut -LiteralPath \"\\$envCommonStartMenuPrograms\\\\$2.lnk\" -TargetPath \"\\$envWinDir\\\\$3.exe\" -IconLocation \"\\$envWinDir\\\\$4.exe\" -Description '$5' -WorkingDirectory '%HOMEDRIVE%\\\\%HOMEPATH%'"
+    ],
+    "description": "Create New Start Menu Shortcut"
+  },
+  "Remove Folder": {
+    "prefix": "psadt-remove-folder",
+    "body": ["# Remove $1", "Remove-ADTFolder -Path \"$2\""],
+    "description": "Remove Folder"
+  },
+  "Remove File from Start Menu": {
+    "prefix": "psadt-remove-startmenu",
+    "body": [
+      "# Remove $1 from Start Menu",
+      "Remove-ADTFile -Path \"\\$envCommonStartMenuPrograms\\\\$2\""
+    ],
+    "description": "Remove File from Start Menu"
+  },
+  "Remove File from Desktop": {
+    "prefix": "psadt-remove-desktop",
+    "body": [
+      "# Remove $1 from Public Desktop",
+      "Remove-ADTFile -Path \"\\$envCommonDesktop\\\\$2\""
+    ],
+    "description": "Remove File from Public Desktop"
+  },
+  "Remove Environment Variable": {
+    "prefix": "psadt-remove-envvar",
+    "body": [
+      "# Removes the $1 environment variable for the machine.",
+      "Remove-ADTEnvironmentVariable -Variable $2 -Target Machine"
+    ],
+    "description": "Remove Machine Environment Variable"
+  },
+  "Copy File": {
+    "prefix": "psadt-copy-file",
+    "body": ["# Copy $1", "Copy-ADTFile -Path \"$1\" -Destination \"$2\""],
+    "description": "Copy File to Destination"
+  },
+  "Copy Folder": {
+    "prefix": "psadt-copy-folder",
+    "body": [
+      "# Copy $1",
+      "Copy-ADTFile -Path \"\\$(\\$adtSession.DirFiles)\\\\$1\" -Destination \"$2\" -Recurse"
+    ],
+    "description": "Copy Folder to Destination"
+  },
+  "Get User Profiles": {
+    "prefix": "psadt-get-userprofiles",
+    "body": [
+      "# Return the user profile path for each user on the system",
+      "[string[]]\\$ProfilePaths = Get-ADTUserProfiles | Select-Object -ExpandProperty ProfilePath"
+    ],
+    "description": "Get All User Profile Paths"
+  },
+  "Copy File to User Profiles": {
+    "prefix": "psadt-copy-userprofiles",
+    "body": [
+      "# Copy file to all user profiles",
+      "Copy-ADTFileToUserProfiles -Path \"\\$(\\$adtSession.DirSupportFiles)\\\\$1\" -Destination \"AppData\\\\Roaming\\\\$2\""
+    ],
+    "description": "Copy File to All User Profiles"
+  },
+  "Remove File from User Profiles": {
+    "prefix": "psadt-remove-file-userprofiles",
+    "body": [
+      "# Removes the specified file from each user profile",
+      "Remove-ADTFileFromUserProfiles -Path \"AppData\\\\Roaming\\\\$1\""
+    ],
+    "description": "Remove File from All User Profiles"
+  },
+  "Remove Folder from User Profiles": {
+    "prefix": "psadt-remove-folder-userprofiles",
+    "body": [
+      "# Removes the specified folder and all its contents recursively from each user profile",
+      "Remove-ADTFileFromUserProfiles -Path \"AppData\\\\Local\\\\$1\" -Recurse"
+    ],
+    "description": "Remove Folder from All User Profiles"
+  },
+  "Set HKCU Registry for All Users": {
+    "prefix": "psadt-set-hkcu-allusers",
+    "body": [
+      "# Set HKCU registry settings for all current and future users",
+      "Invoke-ADTAllUsersRegistryAction {",
+      "    Set-ADTRegistryKey -SID \\$_.SID -LiteralPath 'HKCU\\\\$1' -Name '$2' -Value $3 -Type DWord",
+      "}"
+    ],
+    "description": "Set HKCU Registry Key for All Current and Future Users"
+  },
+  "Remove Registry Key": {
+    "prefix": "psadt-remove-regkey",
+    "body": [
+      "# Deletes the specified registry key.",
+      "Remove-ADTRegistryKey -LiteralPath '${1:HKEY_CURRENT_USER\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce}'"
+    ],
+    "description": "Remove Registry Key (entire key and all values)"
+  },
+  "Remove Registry Value": {
+    "prefix": "psadt-remove-regvalue",
+    "body": [
+      "# Deletes the specified registry value.",
+      "Remove-ADTRegistryKey -LiteralPath 'HKLM:\\\\$1' -Name '$2'"
+    ],
+    "description": "Remove Named Value from Registry Key"
+  },
+  "Update Desktop": {
+    "prefix": "psadt-update-desktop",
+    "body": [
+      "# Refresh the Windows Explorer Shell, reloading the desktop icons and environment variables.",
+      "Update-ADTDesktop"
+    ],
+    "description": "Refresh Windows Explorer Shell"
+  },
+  "If Test-Path Check": {
+    "prefix": "psadt-if-testpath",
+    "body": ["if (Test-Path \"$1\") {", "    $0", "}"],
+    "description": "Check if a given path exists using Test-Path."
+  }
 }

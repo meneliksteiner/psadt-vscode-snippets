@@ -1,0 +1,163 @@
+{
+
+            "Install EXE Application": {
+                        "prefix": "psadtexe",
+                        "body": [
+
+                                    "# Install $1 silently",
+
+                                    "Start-ADTProcess -FilePath \"$2\" -ArgumentList \"$3\""
+
+                        ],
+
+                        "description": "Install EXE Application"
+
+            },
+
+            "Install MSI Application": {
+
+                        "prefix": "psadtmsi",
+
+                        "body": [
+
+                                    "# Install $1 silently",
+
+                                    "Start-ADTMsiProcess -Action Install -FilePath \"$2\" -ArgumentList \"$3\""
+
+                        ],
+
+                        "description": "Install MSI Application"
+
+            },
+
+            "Uninstall Application": {
+
+                        "prefix": "psadtrmapp",
+
+                        "body": [
+
+                                    "# Uninstall $1 silently",
+
+                                    "Uninstall-ADTApplication -Name \"$2\" -ArgumentList \"$3\" -NameMatch \"Exact\""
+
+                        ],
+
+                        "description": "Uninstall Application"
+
+            },
+
+            "Remove File": {
+
+                        "prefix": "psadtrmfile",
+
+                        "body": [
+
+                                    "# Remove $1",
+
+                                    "Remove-ADTFile -Path \"$2\""
+
+                        ],
+
+                        "description": "Remove File"
+
+            },
+
+            "Remove Folder": {
+
+                        "prefix": "psadtrmdir",
+
+                        "body": [
+
+                                    "# Remove $1",
+
+                                    "Remove-ADTFolder -Path \"$2\""
+
+                        ],
+
+                        "description": "Remove Folder"
+
+            },
+
+            "Remove File from Start Menu": {
+
+                        "prefix": "psadtrmstart",
+
+                        "body": [
+
+                                    "# Remove $1 from Start Menu",
+
+                                    "Remove-ADTFile -Path \\\$envCommonStartMenuPrograms\\\\$2\"
+
+                        ],
+
+                        "description": "Remove File from Start Menu"
+
+            },
+
+            "Remove File from Desktop": {
+
+                        "prefix": "psadtrmdesktop",
+
+                        "body": [
+
+                                    "# Remove $1 from Public Desktop",
+
+                                    "Remove-ADTFile -Path \\\$envCommonDesktop\\\\$2\"
+
+                        ],
+
+                        "description": "Remove File from Public Desktop"
+
+            },
+
+            "Copy File": {
+
+                        "prefix": "psadtcpfile",
+
+                        "body": [
+
+                                    "# Copy $1",
+
+                                    "Copy-ADTFile -Path \"$1\" -Destination \"$2\""
+
+                        ],
+
+                        "description": "Copy File to Destination"
+
+            },
+
+            "Copy Folder": {
+
+                        "prefix": "psadtcpdir",
+
+                        "body": [
+
+                                    "# Copy $1",
+
+                                    "Copy-ADTFolder -Path \\\$(\\$adtSession.DirFiles)\\\\$1\ -Destination \"$2\" -Recurse"
+
+                        ],
+
+                        "description": "Copy Folder to Destination"
+
+            },
+
+            "If Test-Path Check": {
+
+                        "prefix": "psadtiftestpath",
+
+                        "body": [
+
+                                    "if (Test-Path \"$1\") {",
+
+                                    "    $0",
+
+                                    "}"
+
+                        ],
+
+                        "description": "Check if a given path exists using Test-Path."
+
+            }
+
+}

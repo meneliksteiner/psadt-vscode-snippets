@@ -17,8 +17,6 @@ If you package more than two or three apps a year with PSADT, these will save yo
 
 ## Installation
 
-### Option 1 — User snippets (recommended)
-
 User snippets are stored in your VS Code profile and work in every workspace.
 
 1. In VS Code, open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
